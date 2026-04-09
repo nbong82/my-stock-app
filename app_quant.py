@@ -40,7 +40,7 @@ if st.button("백테스트 시작"):
             roe = df['ROE'].values[0]
             div = df['DIV'].values[0]
 
-            if per < 15 and roe > 10 and div > 3:
+            if per < 20 and roe > 5 and div > 1.5:
 
                 price_df = stock.get_market_ohlcv(start, end, t)
                 if len(price_df) < 2:
