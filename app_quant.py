@@ -3,6 +3,20 @@ from pykrx import stock
 import pandas as pd
 from datetime import datetime, timedelta
 
+
+def get_safe_date():
+    today = datetime.today()
+    for i in range(7):
+        date = (today - timedelta(days=i)).strftime("%Y%m%d")
+        try:
+            df = stock.get_market_ohlcv(date, date, "005930")
+            if not df.empty:
+                return date
+        except:
+            continue
+    return None
+
+today = get_safe_date()
 st.title("🔥 코치님 퀀트 투자 시스템")
 
 start = "20220101"
@@ -12,7 +26,7 @@ st.header("📊 백테스트 실행")
 
 if st.button("백테스트 시작"):
 
-    tickers = stock.get_market_ticker_list(market="KOSPI")
+    tickers = stock.get_market_ticker_list(today, market="KOSPI")
 
     result = []
 
