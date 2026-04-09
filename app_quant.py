@@ -55,7 +55,8 @@ if st.button("백테스트 시작"):
 
         except:
             continue
-
+if len(result) == 0:
+    st.warning("조건에 맞는 종목 없음 (조건 완화 필요)")
     df_result = pd.DataFrame(result, columns=["티커", "수익률"])
 
     df_top = df_result.sort_values(by="수익률", ascending=False).head(10)
